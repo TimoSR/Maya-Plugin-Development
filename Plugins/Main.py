@@ -49,7 +49,7 @@ def gear_creator(standard_teeth=10, standard_length=0.3):
     return transform, constructor, extrude
 
 
-def teeth_changer(constructor, extrude, standard_teeth=10, length=0.3):
+def gear_teeth_modifier(constructor, extrude, standard_teeth=10, length=0.3):
     """
     Change the number of teeth on a gear with a given number of teeth and a given length for the teeth.
     This will create a new extrude node.
