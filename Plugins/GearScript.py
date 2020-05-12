@@ -2,6 +2,7 @@ import maya.cmds as cmds
 
 
 # Using the Maya 1.0 APIs
+# The test script, to help understand modeling with the Maya API
 
 def gear_creator(standard_teeth=10, standard_length=0.3):
     """
