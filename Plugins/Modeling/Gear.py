@@ -13,10 +13,10 @@ class Gear(object):
 
     """
     TestScript:
-    gearA = Gear()
-    gearA.create()
-    gearA.change_teeth(30, 1)
-    gearA.change_length(2)
+    my_gear1 = Gear()
+    my_gear1.create()
+    my_gear1.change_teeth(30, 1)
+    my_gear1.change_length(2)
     """
 
     def __init__(self, standard_teeth=10, standard_length=0.3):
