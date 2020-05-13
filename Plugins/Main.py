@@ -14,7 +14,7 @@ class ReTimer(object):
     @classmethod
     def set_current_time(cls, time):
         """
-        This method will set
+        Set the current time.
         :param time:
         """
         cmds.currentTime(time)
@@ -22,12 +22,12 @@ class ReTimer(object):
     @classmethod
     def get_selected_range(cls):
         """
-        This method will
+        Get the selected range.
         :return: Selected Range
         """
-        # Establishing a connection to the playback slider, using a mel command
+        # Passing the mel command to connect to the playback slider.
         playback_slider = mel.eval("$tempVar = $gPlayBackSlider")
-        # Range Controller for the playback slider
+        # Passing the range Range of the playback slider.
         selected_range = cmds.timeControl(playback_slider, q=True, rangeArray=True)
 
         return selected_range
@@ -38,7 +38,7 @@ class ReTimer(object):
         Queries the frame of a keyframe, based on a string value passed in.
         :param which: which keyframe to query (first, last, next or previous).
         :param time: Defaults to None, as it is not required for every which value.
-        :return: returns the value of the find key-frame command.
+        :return: returns the value of the find key_frame command.
         """
         # Dictionary containing all the command flags, that will be passed into the find key frames command.
         kwargs = {"which": which}
@@ -47,7 +47,7 @@ class ReTimer(object):
             # Kwargs allows to pass key-worded variable length of arguments.
             # Passing in start and end frame match contained in a tuple.
             kwargs["time"] = (time, time)
-        # Returning the value of the find key-frame command.
+        # Returning the value of the find key_frame command.
         return cmds.findKeyframe(**kwargs)
 
 
