@@ -1,7 +1,7 @@
 import maya.cmds as cmds
 
 """
-# Using: Maya API 1.0, Python 2.7 
+# Using: Maya API 1.0, Python 2.7.11 
 # Author: Timothy Stoltzner Rasmussen
 """
 
@@ -46,7 +46,7 @@ class Gear(object):
         self.transform, self.shape = cmds.polyPipe(subdivisionsAxis=self.spans)
 
         # Finding the polyPipe node and set it equal to the constructor
-        for node in cmds.listConnections("%s.inMesh" % self.transform):
+        for node in cmds.listConnections("{0}.inMesh".format(self.transform)):
             if cmds.objectType(node) == "polyPipe":
                 self.constructor = node
                 break
@@ -63,7 +63,7 @@ class Gear(object):
         for face in side_faces:
             # The '%s.f[%s]' expands to something like pPipe1.f[20]
             # ADD selecting the wanted faces on the created polygonPipe.
-            cmds.select("%s.%s" % (self.transform, face), add=True)
+            cmds.select("{0}.{1}".format(self.transform, face), add=True)
 
         # Instead of returning a value, the extrude note will be stored onto the class
         # as a class variable
@@ -93,7 +93,7 @@ class Gear(object):
 
         # Concatenation %d for numbers %s strings
         for face in side_faces:
-            faces.append("f[%d]" % face)
+            faces.append("f[{0}]".format(face))
 
         return faces
 
@@ -106,7 +106,7 @@ class Gear(object):
         # cmds.setAttr('extrudeNode.inputComponents', 2, 'f[1]', 'f[2]', type='componentList'
         # *args = [] = face1, face2, face3
 
-        cmds.setAttr("%s.inputComponents" % self.extrude, len(faces), *faces, type="componentList")
+        cmds.setAttr("{0}.inputComponents".format(self.extrude), len(faces), *faces, type="componentList")
 
         self.change_length(length)
 

@@ -2,7 +2,7 @@ import maya.cmds as cmds
 import maya.mel as mel
 
 """
-Using: Maya API 1.0, Python 2.7
+Using: Maya API 1.0, Python 2.7.11
 Author: Timothy Stoltzner Rasmussen
 Requirements: A simple animation in maya, to showcase timeline editing. 
 """
@@ -12,8 +12,43 @@ class ReTimerHelperMethods(object):
 
     # Method Types Python
     # https://levelup.gitconnected.com/method-types-in-python-2c95d46281cd
+    # Using cls, as this won't be initialized with parameters.
     # What is @classmethod
     # https://www.programiz.com/python-programming/methods/built-in/classmethod
+
+    @classmethod
+    def re_time_keys(cls, re_time_value, incremental, move_to_next):
+
+        range_start_time, range_end_time = cls.get_selected_range()
+
+        start_keyframe_time = cls.get_start_keyframe_time(range_start_time)
+
+        last_keyframe_time = cls.get_last_keyframe_time()
+
+        current_time = start_keyframe_time
+
+        new_keyframe_times = [start_keyframe_time]
+        current_keyframe_values = [start_keyframe_time]
+
+        while current_time != last_keyframe_time:
+
+            next_keyframe_time = cls.find_keyframe("next", current_time)
+
+            if incremental:
+                time_diff = next_keyframe_time - current_time
+                if current_time < range_end_time:
+                    time_diff += re_time_value
+                    if time_diff < 1:
+                        time_diff = 1
+
+            # Getting the keyframe in the last index
+            new_keyframe_times.append(new_keyframe_times[-1] + time_diff)
+            current_time = new_keyframe_times
+
+            current_keyframe_values.append(current_time)
+
+        print("Current: {0}".format(current_keyframe_values))
+        print("Re-timed: {0}".format(new_keyframe_times))
 
     @classmethod
     def set_current_time(cls, time):
