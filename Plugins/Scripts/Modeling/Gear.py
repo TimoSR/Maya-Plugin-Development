@@ -1,7 +1,7 @@
 import maya.cmds as cmds
 
 """
-# Using: Maya API 1.0 
+# Using: Maya API 1.0, Python 2.7 
 # Author: Timothy Stoltzner Rasmussen
 """
 
