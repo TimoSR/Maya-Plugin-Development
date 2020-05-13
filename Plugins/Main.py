@@ -4,11 +4,13 @@ import maya.mel as mel
 """
 Using: Maya API 1.0, Python 2.7
 Author: Timothy Stoltzner Rasmussen
+Requirements: A simple animation in maya, to showcase timeline editing. 
 """
 
 
 class ReTimer(object):
 
+    # What is @classmethod
     # https://www.programiz.com/python-programming/methods/built-in/classmethod
 
     @classmethod
@@ -27,7 +29,7 @@ class ReTimer(object):
         """
         # Passing the mel command to connect to the playback slider.
         playback_slider = mel.eval("$tempVar = $gPlayBackSlider")
-        # Passing the range Range of the playback slider.
+        # Passing the selected range of the playback slider.
         selected_range = cmds.timeControl(playback_slider, q=True, rangeArray=True)
 
         return selected_range
@@ -45,10 +47,25 @@ class ReTimer(object):
         # Checking if the flag is next or previous.
         if which in ["next", "previous"]:
             # Kwargs allows to pass key-worded variable length of arguments.
-            # Passing in start and end frame match contained in a tuple.
+            # Adding the time flag to dictionary, passing in the time of the start and end frame.
             kwargs["time"] = (time, time)
         # Returning the value of the find key_frame command.
+        # Can also be written as cmds.findKeyframe(which=which, time=time) but time is not guaranteed to be used.
         return cmds.findKeyframe(**kwargs)
+
+    @classmethod
+    def change_time_of_keyframe(cls, current_time, new_time):
+        """
+        Changes the time a keyframe is on.
+        Can't move keys past other keys on the timeline.
+        :param current_time:
+        :param new_time:
+        :return:
+        """
+        # Maya keyframe command.
+        # Time is the same time because its targeting the same frame.
+        # TimeChange is the time we want to change to.
+        cmds.keyframe(edit=True, time=(current_time, current_time), timeChange=new_time)
 
 
 if __name__ == "__main__":
