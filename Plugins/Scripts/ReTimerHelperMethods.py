@@ -18,6 +18,17 @@ class ReTimerHelperMethods(object):
 
     @classmethod
     def re_time_keys(cls, re_time_value, incremental, move_to_next):
+        """
+        Re-time the selected keys (range).
+        :param re_time_value: Is the number of frames, how it is interpreted depends on incremental.
+        :param incremental: If False, then the re_time_value will be the exact number of frames, that should be between
+        keyframes. This will be the top row buttons in the UI. When True the re_time value will be how many frames
+        should be inserted between the keyframes in the selected range.
+        :param move_to_next: 
+        :return:
+        """
+
+        # Using the defined helper methods, I query Maya for time values.
 
         range_start_time, range_end_time = cls.get_selected_range()
 

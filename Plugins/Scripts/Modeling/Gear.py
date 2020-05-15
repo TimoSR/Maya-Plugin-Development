@@ -91,7 +91,6 @@ class Gear(object):
         # The list for collecting the faces
         faces = []
 
-        # Concatenation %d for numbers %s strings
         for face in side_faces:
             faces.append("f[{0}]".format(face))
 
