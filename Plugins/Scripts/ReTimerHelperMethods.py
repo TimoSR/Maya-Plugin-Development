@@ -99,7 +99,9 @@ class ReTimerHelperMethods(object):
         print("Current: {0}".format(current_keyframe_values))
         print("Re-timed: {0}".format(new_keyframe_times))
 
+        # Checking the length of the new keyframe times list is bigger then one.
         if len(new_keyframe_times) > 1:
+            # If there more then one value, begin the recursive re-timer. 
             cls.re_time_keys_recursive(start_keyframe_time, 0, new_keyframe_times)
 
     @classmethod
@@ -124,11 +126,17 @@ class ReTimerHelperMethods(object):
         # Getting the next keyframe.
         next_keyframe_time = cls.find_keyframe("next", current_time)
 
+        # If the keyframe can be moved.
         if updated_keyframe_time < next_keyframe_time:
+            # Change the time immediately to the updated time.
             cls.change_time_of_keyframe(current_time, updated_keyframe_time)
+            # Move the next keyframe
             cls.re_time_keys_recursive(next_keyframe_time, index+1, new_keyframe_times)
+        # If not
         else:
+            # Move the next keyframe
             cls.re_time_keys_recursive(next_keyframe_time, index+1, new_keyframe_times)
+            # When the next keyframe is moved, it is safe to change the time of the current keyframe.
             cls.change_time_of_keyframe(current_time, updated_keyframe_time)
 
 
