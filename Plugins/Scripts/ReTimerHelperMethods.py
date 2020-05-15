@@ -24,31 +24,52 @@ class ReTimerHelperMethods(object):
         :param incremental: If False, then the re_time_value will be the exact number of frames, that should be between
         keyframes. This will be the top row buttons in the UI. When True the re_time value will be how many frames
         should be inserted between the keyframes in the selected range.
-        :param move_to_next: 
+        :param move_to_next:
         :return:
         """
 
         # Using the defined helper methods, I query Maya for time values.
 
+        # The user selected range in the playback slider.
         range_start_time, range_end_time = cls.get_selected_range()
 
+        # The keyframe of the start of the selected range.
         start_keyframe_time = cls.get_start_keyframe_time(range_start_time)
 
+        # The very last keyframe for any of the selected objects.
         last_keyframe_time = cls.get_last_keyframe_time()
 
+        # The start keyframe time, if we have a range, the current_time will always be the start of that range.
         current_time = start_keyframe_time
 
+        # A list to store all of the soon to be calculated new keyframe times. start_keyframe_time is the anchor,
+        # while its time will not change, nor will any of the frame to the left of it. It will be required to calculate
+        # the new key frame times.
         new_keyframe_times = [start_keyframe_time]
+
+        #
         current_keyframe_values = [start_keyframe_time]
 
+        # This while loop is used to iterate over each of the key frames, starting at the start keyframe time,
+        # which the time is initially set to, and the loop end at the current time is equal to the last keyframe time.
         while current_time != last_keyframe_time:
-
+            # Getting the next keyframe time. This will be used in the end of the loop to set the current_time to the
+            # next keyframes time until the loop reaches the last_keyframes_time.
             next_keyframe_time = cls.find_keyframe("next", current_time)
-
+            # If incremental is True.
             if incremental:
+                # Find the time difference between the current keyframe time and the next.
                 time_diff = next_keyframe_time - current_time
+                # If current time is less than the end time of the range.
                 if current_time < range_end_time:
+                    # Increment the time difference with the re_time_value.
                     time_diff += re_time_value
+
+                    # One important thing, is that i need to handle one specific case, where too many frames is
+                    # being removed. There most always be 1 frame between keyframes, and keyframes cannot jump over
+                    # one another.
+
+                    # Therefore I check if time_diff is less than one, if so I force it to be one.
                     if time_diff < 1:
                         time_diff = 1
 
