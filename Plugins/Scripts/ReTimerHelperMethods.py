@@ -66,10 +66,10 @@ class ReTimerHelperMethods(object):
                     time_diff += re_time_value
 
                     # One important thing, is that i need to handle one specific case, where too many frames is
-                    # being removed. There most always be 1 frame between keyframes, and keyframes cannot jump over
+                    # being removed. There must always be 1 frame between keyframes, and keyframes cannot jump over
                     # one another.
 
-                    # Therefore I check if time_diff is less than one, if so I force it to be one.
+                    # Therefore I check if time_diff is less than one, if so, I force it to be one.
                     if time_diff < 1:
                         time_diff = 1
 
