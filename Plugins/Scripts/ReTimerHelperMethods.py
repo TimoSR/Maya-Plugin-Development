@@ -104,10 +104,24 @@ class ReTimerHelperMethods(object):
 
     @classmethod
     def re_time_keys_recursive(cls, current_time, index, new_keyframe_times):
+        """
+        A recursive method to re-time keyframe times.
+        Starting with the first keyframe, verifying it can be moved, otherwise wait to the next frame has been
+        moved, then move it.
+        :param current_time:
+        :param index:
+        :param new_keyframe_times:
+        :return:
+        """
+
+        # Exit when index is larger or equal to length of new key frame times list.
         if index >= len(new_keyframe_times):
             return
+
+        # Storing the updated key frame time.
         updated_keyframe_time = new_keyframe_times[index]
 
+        # Getting the next keyframe.
         next_keyframe_time = cls.find_keyframe("next", current_time)
 
         if updated_keyframe_time < next_keyframe_time:
