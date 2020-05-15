@@ -47,7 +47,7 @@ class ReTimerHelperMethods(object):
         # the new key frame times.
         new_keyframe_times = [start_keyframe_time]
 
-        #
+        # A list to store current keyframe time
         current_keyframe_values = [start_keyframe_time]
 
         # This while loop is used to iterate over each of the key frames, starting at the start keyframe time,
@@ -65,7 +65,7 @@ class ReTimerHelperMethods(object):
                     # Increment the time difference with the re_time_value.
                     time_diff += re_time_value
 
-                    # One important thing, is that i need to handle one specific case, where too many frames is
+                    # One important thing, is that I need to handle one specific case, where too many frames is
                     # being removed. There must always be 1 frame between keyframes, and keyframes cannot jump over
                     # one another.
 
@@ -73,12 +73,29 @@ class ReTimerHelperMethods(object):
                     if time_diff < 1:
                         time_diff = 1
 
-            # Getting the keyframe in the last index
+            # Calculation of new keyframe times, when the re-time value is absolute.
+            else:
+                # Because the re-time value is the exact number of frames, that should separate keyframes.
+                # The time difference for any keyframes in the selected range will be set to this value.
+
+                # Keyframes within the selected range
+                if current_time < range_end_time:
+                    time_diff = re_time_value
+                # Keyframes outside the selected range.
+                else:
+                    # Will keep the same number of frames between  the next keyframe, and will only be moved in
+                    # relation to the previous keyframe.
+                    time_diff = next_keyframe_time - current_time
+
+            # Calculating the final re-timed value for this keyframe, and add it to the new_keyframes_times list.
+            # To calculate the final value. I add the last keyframes new time and the time difference.
             new_keyframe_times.append(new_keyframe_times[-1] + time_diff)
             current_time = new_keyframe_times
 
+            # Storing the new current time.
             current_keyframe_values.append(current_time)
 
+        # Printing the contents of each list
         print("Current: {0}".format(current_keyframe_values))
         print("Re-timed: {0}".format(new_keyframe_times))
 
