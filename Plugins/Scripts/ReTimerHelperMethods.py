@@ -99,6 +99,25 @@ class ReTimerHelperMethods(object):
         print("Current: {0}".format(current_keyframe_values))
         print("Re-timed: {0}".format(new_keyframe_times))
 
+        if len(new_keyframe_times) > 1:
+            cls.re_time_keys_recursive(start_keyframe_time, 0, new_keyframe_times)
+
+    @classmethod
+    def re_time_keys_recursive(cls, current_time, index, new_keyframe_times):
+        if index >= len(new_keyframe_times):
+            return
+        updated_keyframe_time = new_keyframe_times[index]
+
+        next_keyframe_time = cls.find_keyframe("next", current_time)
+
+        if updated_keyframe_time < next_keyframe_time:
+            cls.change_time_of_keyframe(current_time, updated_keyframe_time)
+            cls.re_time_keys_recursive(next_keyframe_time, index+1, new_keyframe_times)
+        else:
+            cls.re_time_keys_recursive(next_keyframe_time, index+1, new_keyframe_times)
+            cls.change_time_of_keyframe(current_time, updated_keyframe_time)
+
+
     @classmethod
     def set_current_time(cls, time):
         """
