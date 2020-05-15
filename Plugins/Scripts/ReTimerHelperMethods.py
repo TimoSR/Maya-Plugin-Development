@@ -101,7 +101,7 @@ class ReTimerHelperMethods(object):
 
         # Checking the length of the new keyframe times list is bigger then one.
         if len(new_keyframe_times) > 1:
-            # If there more then one value, begin the recursive re-timer. 
+            # If there more then one value, begin the recursive re-timer.
             cls.re_time_keys_recursive(start_keyframe_time, 0, new_keyframe_times)
 
     @classmethod
@@ -110,9 +110,9 @@ class ReTimerHelperMethods(object):
         A recursive method to re-time keyframe times.
         Starting with the first keyframe, verifying it can be moved, otherwise wait to the next frame has been
         moved, then move it.
-        :param current_time:
-        :param index:
-        :param new_keyframe_times:
+        :param current_time: The chosen start keyframes time.  
+        :param index: The start index.
+        :param new_keyframe_times: List holding the keyframe times.
         :return:
         """
 
