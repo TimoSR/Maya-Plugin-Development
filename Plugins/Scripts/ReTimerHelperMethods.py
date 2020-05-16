@@ -104,6 +104,23 @@ class ReTimerHelperMethods(object):
             # If there more then one value, begin the recursive re-timer.
             cls.re_time_keys_recursive(start_keyframe_time, 0, new_keyframe_times)
 
+        # Storing the first keyframe time.
+        first_keyframe_time = cls.find_keyframe("first")
+
+        # The implementation of the move_to_next functionality, set in the parameters.
+        if move_to_next and range_start_time >= first_keyframe_time:
+            # When move_to_next is True and the range start time is after the very first keyframe, the current time
+            # will be set to the next keyframe, after the start keyframe time.
+            next_keyframe_time = cls.find_keyframe("next", start_keyframe_time)
+            cls.set_current_time(next_keyframe_time)
+        elif range_end_time > first_keyframe_time:
+            # When move_to_next is False and range end time is before the first keyframe, after re-timing the current
+            # time, will be set to the start keyframe time (This is the first keyframe of the range).
+            cls.set_current_time(start_keyframe_time)
+        else:
+            # If neither of the two above conditions is met, set the current time to the ranges start time.
+            cls.set_current_time(range_start_time)
+
     @classmethod
     def re_time_keys_recursive(cls, current_time, index, new_keyframe_times):
         """
@@ -131,14 +148,13 @@ class ReTimerHelperMethods(object):
             # Change the time immediately to the updated time.
             cls.change_time_of_keyframe(current_time, updated_keyframe_time)
             # Move the next keyframe
-            cls.re_time_keys_recursive(next_keyframe_time, index+1, new_keyframe_times)
+            cls.re_time_keys_recursive(next_keyframe_time, index + 1, new_keyframe_times)
         # If not
         else:
             # Move the next keyframe
-            cls.re_time_keys_recursive(next_keyframe_time, index+1, new_keyframe_times)
+            cls.re_time_keys_recursive(next_keyframe_time, index + 1, new_keyframe_times)
             # When the next keyframe is moved, it is safe to change the time of the current keyframe.
             cls.change_time_of_keyframe(current_time, updated_keyframe_time)
-
 
     @classmethod
     def set_current_time(cls, time):
