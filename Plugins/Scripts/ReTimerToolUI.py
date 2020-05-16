@@ -31,5 +31,15 @@ class ReTimerToolUi(QtWidgets.QDialog):
         elif cmds.about(macOS=True):
             self.setWindowFlags(QtCore.Qt.Tool)
 
-        
+        self.create_widgets()
+        self.create_layouts()
+        self.create_connection()
 
+    def create_widgets(self):
+        pass
+
+    def create_layouts(self):
+        pass
+
+    def create_connection(self):
+        pass
