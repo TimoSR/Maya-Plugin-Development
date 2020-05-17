@@ -295,6 +295,7 @@ class RetimingUi(QtWidgets.QDialog):
 
         # Creating 6 buttons, moving up to 6 frames as a maximum.
         for i in range(1, 7):
+            # The text on the button.
             btn = QtWidgets.QPushButton("{0}f".format(i))
             # Using the constant to set a fixed width
             btn.setFixedWidth(self.ABSOLUTE_BUTTON_WIDTH)
@@ -304,15 +305,25 @@ class RetimingUi(QtWidgets.QDialog):
             # re-timed with, as whether or not it is incremental timing.
             # Because this is absolute buttons, it is not incremental, and i will set the second value to False.
             btn.setProperty(self.RETIMING_PROPERTY_NAME, [i, False])
-            # Now I add the new button to the list. 
+            # Now I add the new absolute button to the list.
             self.absolute_buttons.append(btn)
 
-        # A list to store the low-row buttons.
+        # A list to store the button-row buttons.
         self.relative_buttons = []
+
+        # Creating 4 Buttons.
         for i in [-2, -1, 1, 2]:
+            # The text on the button.
             btn = QtWidgets.QPushButton("{0}f".format(i))
+            # Using the constant to set a fixed width
             btn.setFixedWidth(self.RELATIVE_BUTTON_WIDTH)
+            # Storing the value inside the widget itself, later this will allow the re_time method to pull out how
+            # many frames, aswell whether or not it is absolute re-timing or relative re-timing. Passing in a list,
+            # with two values, the first is the current value of i, this will be the number of frames, that will be
+            # re-timed with, as whether or not it is incremental timing.
+            # Because this is relative button, it is incremental, so I set the value to True.
             btn.setProperty(self.RETIMING_PROPERTY_NAME, [i, True])
+            # Now I add the new relative button to the list.
             self.relative_buttons.append(btn)
 
         self.move_to_next_cb = QtWidgets.QCheckBox("Move to Next Frame")
