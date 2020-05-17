@@ -308,7 +308,7 @@ class RetimingUi(QtWidgets.QDialog):
             # Now I add the new absolute button to the list.
             self.absolute_buttons.append(btn)
 
-        # A list to store the button-row buttons.
+        # A list to store the bottom-row buttons.
         self.relative_buttons = []
 
         # Creating 4 Buttons.
@@ -326,22 +326,33 @@ class RetimingUi(QtWidgets.QDialog):
             # Now I add the new relative button to the list.
             self.relative_buttons.append(btn)
 
+        # To enable move to next frame, I set a checkbox to give the option to enable and disable.
         self.move_to_next_cb = QtWidgets.QCheckBox("Move to Next Frame")
 
     def create_layouts(self):
+        # The layout for my top-row buttons. In a horizontal layout.
         absolute_re_time_layout = QtWidgets.QHBoxLayout()
+        # The spacing between buttons.
         absolute_re_time_layout.setSpacing(2)
+        # Iterating over my list of absolute buttons.
         for btn in self.absolute_buttons:
             absolute_re_time_layout.addWidget(btn)
 
+        # The layout for my bottom-row buttons. In a horizontal layout.
         relative_re_time_layout = QtWidgets.QHBoxLayout()
+        # The spacing between buttons.
         relative_re_time_layout.setSpacing(2)
+        # Iterating over my list of relative buttons.
         for btn in self.relative_buttons:
             relative_re_time_layout.addWidget(btn)
+            # If there is two widgets in this layout.
             if relative_re_time_layout.count() == 2:
+                # Add a stretch between the negative and positive numbers.
                 relative_re_time_layout.addStretch()
 
+        # Which is a vertical layout.
         main_layout = QtWidgets.QVBoxLayout(self)
+        #
         main_layout.setContentsMargins(2, 2, 2, 2)
         main_layout.setSpacing(2)
         main_layout.addLayout(absolute_re_time_layout)
