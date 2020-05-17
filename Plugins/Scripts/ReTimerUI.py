@@ -40,7 +40,7 @@ class ReTimerUI(QtWidgets.QDialog):
             self.setWindowFlags(self.windowFlags() ^ QtCore.Qt.WindowContextHelpButtonHint)
         # Else if Mac OS
         elif cmds.about(macOS=True):
-
+            # Setting the dialog to be interpreted as a tool, to keep the dialog from falling behind Mayas main window.
             self.setWindowFlags(QtCore.Qt.Tool)
 
         self.create_widgets()
@@ -55,3 +55,17 @@ class ReTimerUI(QtWidgets.QDialog):
 
     def create_connection(self):
         pass
+
+
+if __name__ == "__main__":
+
+    re_timing_ui = ReTimerUI()
+
+    try:
+        re_timing_ui.close()
+        re_timing_ui.deleteLater()
+
+    except:
+        pass
+
+    re_timing_ui.show()
