@@ -245,7 +245,7 @@ class RetimingUi(QtWidgets.QDialog):
     WINDOW_TITLE = "Retiming Tool"
     ABSOLUTE_BUTTON_WIDTH = 50
     RELATIVE_BUTTON_WIDTH = 64
-    RETIMING_PROPERTY_NAME = "retiming_data"
+    RETIMING_PROPERTY_NAME = "re_timing_data"
 
     dlg_instance = None
 
@@ -290,13 +290,24 @@ class RetimingUi(QtWidgets.QDialog):
         self.create_connections()
 
     def create_widgets(self):
+        # A list to store the top-row buttons
         self.absolute_buttons = []
+
+        # Creating 6 buttons, moving up to 6 frames as a maximum.
         for i in range(1, 7):
             btn = QtWidgets.QPushButton("{0}f".format(i))
+            # Using the constant to set a fixed width
             btn.setFixedWidth(self.ABSOLUTE_BUTTON_WIDTH)
+            # Storing the value inside the widget itself, later this will allow the re_time method to pull out how
+            # many frames, aswell whether or not it is absolute re-timing or relative re-timing. Passing in a list,
+            # with two values, the first is the current value of i, this will be the number of frames, that will be
+            # re-timed with, as whether or not it is incremental timing.
+            # Because this is absolute buttons, it is not incremental, and i will set the second value to False.
             btn.setProperty(self.RETIMING_PROPERTY_NAME, [i, False])
+            # Now I add the new button to the list. 
             self.absolute_buttons.append(btn)
 
+        # A list to store the low-row buttons.
         self.relative_buttons = []
         for i in [-2, -1, 1, 2]:
             btn = QtWidgets.QPushButton("{0}f".format(i))
