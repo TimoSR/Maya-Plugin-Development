@@ -7,7 +7,9 @@ import maya.mel as mel
 import maya.OpenMayaUI as omui
 
 
-class ReTimerToolUi(QtWidgets.QDialog):
+# Extends QDialog class
+class ReTimerUI(QtWidgets.QDialog):
+    # Class constants
     WINDOW_TITLE = "Re-timer Tool"
     ABSOLUTE_BUTTON_WIDTH = 50
     RELATIVE_BUTTON_WIDTH = 64
@@ -15,20 +17,30 @@ class ReTimerToolUi(QtWidgets.QDialog):
     @classmethod
     def maya_main_window(cls):
         """
+        Used to parent this dialog to Mayas main window.
         :return: The Maya main window widget as a widget as a Python object.
         """
         main_window_ptr = omui.MQtUtil.mainWindow()
         return wrapInstance(long(main_window_ptr), QtWidgets.QWidget)
 
     def __init__(self):
+        """
+        The Constructor of the class.
+        """
 
         super(ReTimerHelperMethods, self).__init__(self.maya_main_window())
 
+        # Setting the window title of the main window.
         self.setWindowTitle(self.WINDOW_TITLE)
 
+        # Setting different window flags based on the operating system.
+        # If windows.
         if cmds.about(ntOS=True):
+            # The question mark in the top right of the title bar, is removed from the dialog.
             self.setWindowFlags(self.windowFlags() ^ QtCore.Qt.WindowContextHelpButtonHint)
+        # Else if Mac OS
         elif cmds.about(macOS=True):
+
             self.setWindowFlags(QtCore.Qt.Tool)
 
         self.create_widgets()
