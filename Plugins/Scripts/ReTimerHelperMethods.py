@@ -238,7 +238,7 @@ class ReTimerHelperMethods(object):
         """
         return cls.find_keyframe("last")
 
-
+# Extends QDialog class
 class RetimingUi(QtWidgets.QDialog):
 
     # Constants
@@ -339,7 +339,7 @@ class RetimingUi(QtWidgets.QDialog):
             retiming_data = btn.property(self.RETIMING_PROPERTY_NAME)
             move_to_next = self.move_to_next_cb.isChecked()
 
-            ReTimerHelperMethods.retime_keys(retiming_data[0], retiming_data[1], move_to_next)
+            ReTimerHelperMethods.re_time_keys(retiming_data[0], retiming_data[1], move_to_next)
 
 
 if __name__ == "__main__":
