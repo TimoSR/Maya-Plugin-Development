@@ -1,5 +1,7 @@
+import traceback
 import maya.cmds as cmds
 import maya.mel as mel
+import maya.OpenMaya as om #Maya API 2.0
 from PySide2 import QtCore, QtWidgets
 from shiboken2 import wrapInstance
 import maya.OpenMayaUI as omui
@@ -247,16 +249,24 @@ class RetimingUi(QtWidgets.QDialog):
     RELATIVE_BUTTON_WIDTH = 64
     RETIMING_PROPERTY_NAME = "re_timing_data"
 
+    # Storing an instance of this dialog.
+    # Storing as class level variable.
     dlg_instance = None
 
+    # Adding a display method to the class, for production release.
     @classmethod
     def display(cls):
+        # I check if there isn't an instance created.
         if not cls.dlg_instance:
+            # Storing as class level variable.
             cls.dlg_instance = RetimingUi()
 
+        # I check if the instance is hidden.
         if cls.dlg_instance.isHidden():
+            # If it is hidden I show it.
             cls.dlg_instance.show()
         else:
+            # Otherwise I will raise the window and activate it.
             cls.dlg_instance.raise_()
             cls.dlg_instance.activateWindow()
 
@@ -364,20 +374,41 @@ class RetimingUi(QtWidgets.QDialog):
         main_layout.addWidget(self.move_to_next_cb)
 
     def create_connections(self):
+        # Creating the clicked signal connected to the retime slot.
+        # For the absolute buttons.
         for btn in self.absolute_buttons:
             btn.clicked.connect(self.retime)
-
+        # For the relative buttons.
         for btn in self.relative_buttons:
             btn.clicked.connect(self.retime)
 
     def retime(self):
+        # Waiting for a signal to be received from a widget(button) click.
+        # I query this using the sender method.
         btn = self.sender()
+        # If a signal is received and therefore was a sender.
         if btn:
+            # I retrieve the data stored as a property. Storing ot in retiming_data, getting the data with the
+            # property method passing in the key used to store the data.
             retiming_data = btn.property(self.RETIMING_PROPERTY_NAME)
+            # I query if the move_to_next is checked.
             move_to_next = self.move_to_next_cb.isChecked()
 
-            ReTimerHelperMethods.re_time_keys(retiming_data[0], retiming_data[1], move_to_next)
-
+            # Using the undo info command, that would group multiple undo operations into a single undo.
+            # I create a undo chunk sorrounding the RetimerHelperMethods re-time keys.
+            # Open flag.
+            cmds.undoInfo(openChunk=True)
+            try:
+                # I now call the RetimeHelperMethods re_time_keys method.
+                # I pass in the number of frames and of it is a incremental or absolute change, and if move_to_next is enabled.
+                ReTimerHelperMethods.re_time_keys(retiming_data[0], retiming_data[1], move_to_next)
+            except:
+                # Printing the error to the editor.
+                traceback.print_exc()
+                # Displaying the error to maya.
+                om.MGlobal.displayError("Re-time error occurred. See the script editor for details.")
+            # Close fag.
+            cmds.undoInfo(closeChunk=True)
 
 if __name__ == "__main__":
 
