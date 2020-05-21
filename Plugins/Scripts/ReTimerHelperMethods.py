@@ -398,6 +398,7 @@ class RetimingUi(QtWidgets.QDialog):
             # I create a undo chunk sorrounding the RetimerHelperMethods re-time keys.
             # Open flag.
             cmds.undoInfo(openChunk=True)
+            # Hindering not reaching the undoInfo, by handling exceptions.
             try:
                 # I now call the RetimeHelperMethods re_time_keys method.
                 # I pass in the number of frames and of it is a incremental or absolute change, and if move_to_next is enabled.
