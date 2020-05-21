@@ -350,13 +350,17 @@ class RetimingUi(QtWidgets.QDialog):
                 # Add a stretch between the negative and positive numbers.
                 relative_re_time_layout.addStretch()
 
-        # Which is a vertical layout.
+        # Building the UI.
+        # Adding my main layout, which is a vertical box layout layout, parented to dialog.
         main_layout = QtWidgets.QVBoxLayout(self)
-        #
+        # Setting the margins.
         main_layout.setContentsMargins(2, 2, 2, 2)
+        # Setting the spacing
         main_layout.setSpacing(2)
+        # I now add the two button layouts.
         main_layout.addLayout(absolute_re_time_layout)
         main_layout.addLayout(relative_re_time_layout)
+        # Adding the checkbox.
         main_layout.addWidget(self.move_to_next_cb)
 
     def create_connections(self):
