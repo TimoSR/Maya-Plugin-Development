@@ -1,6 +1,8 @@
 # Maya-Plugin-Development
 Plugins designed to ease the development process of 3D models and animation for game developers.
 
+The tools a created to people with an understanding of the maya software, I'll therefore suggest running the examples with at the exam.
+
 ## Exam Proposal
 This project is a solo project, as it takes interest in my future internship. My project will focus on
 developing/learning to program tools to ease the production of 3D models for real time-visual
@@ -28,4 +30,9 @@ To get an insight into the RTVFX community I will refer to realtimevfx.com.
 
 A completed retimer tool for animation & prototype of procedural modeling script.
 
-The retimer tool is
+The retimer tool is used automate lot of the manual work that needs to be done in an animation. With a tool like this you can get your animation to feel just right. The tool utilizes the Maya timeline data, reading the keyframes creating accesspoints through an easy to use interface. To use this tool, you are required to have a keyframes to edit, therefore I have created an animation example that can be used.  
+
+The procedural modeling script is bonus project i did to showcase how to can receive mesh data from maya, and create simple mesh shapes in an easier way. 
+
+
+## Guides to Test the projects
