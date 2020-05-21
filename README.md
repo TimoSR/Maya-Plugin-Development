@@ -38,6 +38,7 @@ The procedural modeling script is bonus project i did to showcase how to can rec
 ## Guides to Test the projects
 
 ### Animation Retimer Tool
+https://www.notion.so/Animation-Re-Timer-6ae15197636d439fafbfcab669075631
 
 ### Model Creator
 https://www.notion.so/Simple-Model-Creator-931ab8237ea64e3ea7f4ac8046e24c3c
