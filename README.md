@@ -36,3 +36,5 @@ The procedural modeling script is bonus project i did to showcase how to can rec
 
 
 ## Guides to Test the projects
+
+https://www.notion.so/Simple-Model-Creator-931ab8237ea64e3ea7f4ac8046e24c3c
