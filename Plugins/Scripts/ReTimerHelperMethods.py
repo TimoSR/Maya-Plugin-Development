@@ -52,9 +52,6 @@ class ReTimerHelperMethods(object):
         # the new key frame times.
         new_keyframe_times = [start_keyframe_time]
 
-        # A list to store current keyframe time
-        current_keyframe_values = [start_keyframe_time]
-
         # This while loop is used to iterate over each of the key frames, starting at the start keyframe time,
         # which the time is initially set to, and the loop end at the current time is equal to the last keyframe time.
         while current_time != last_keyframe_time:
@@ -95,14 +92,7 @@ class ReTimerHelperMethods(object):
             # Calculating the final re-timed value for this keyframe, and add it to the new_keyframes_times list.
             # To calculate the final value. I add the last keyframes new time and the time difference.
             new_keyframe_times.append(new_keyframe_times[-1] + time_diff)
-            current_time = new_keyframe_times
-
-            # Storing the new current time.
-            current_keyframe_values.append(current_time)
-
-        # Printing the contents of each list
-        print("Current: {0}".format(current_keyframe_values))
-        print("Re-timed: {0}".format(new_keyframe_times))
+            current_time = next_keyframe_time
 
         # Checking the length of the new keyframe times list is bigger then one.
         if len(new_keyframe_times) > 1:
