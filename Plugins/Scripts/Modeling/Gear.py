@@ -11,14 +11,6 @@ class Gear(object):
     standard_length = None
     standard_teeth = None
 
-    """
-    TestScript:
-    my_gear1 = Gear()
-    my_gear1.create()
-    my_gear1.change_teeth(30, 1)
-    my_gear1.change_length(2)
-    """
-
     def __init__(self, standard_teeth=10, standard_length=0.3):
         """
         To use the gear class you need to assign the teeth amount and the length.
@@ -109,5 +101,10 @@ class Gear(object):
 
         self.change_length(length)
 
+
+my_gear1 = Gear()
+my_gear1.create()
+my_gear1.change_teeth(30, 1)
+my_gear1.change_length(2)
 
 
