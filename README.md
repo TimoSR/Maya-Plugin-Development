@@ -35,7 +35,7 @@ The retimer tool is used automate lot of the manual work that needs to be done i
 The procedural modeling script is bonus project i did to showcase how to receive mesh data from maya, and create simple mesh shapes in an easier way. 
 
 
-## Guides to Test the projects
+## Guides to test the projects
 
 ### Animation Retimer Tool
 https://www.notion.so/Animation-Re-Timer-6ae15197636d439fafbfcab669075631
