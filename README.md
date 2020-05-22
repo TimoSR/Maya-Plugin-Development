@@ -1,7 +1,7 @@
 # Maya-Plugin-Development
 Plugins designed to ease the development process of 3D models and animation for game developers.
 
-The tools a created to people with an understanding of the maya software, I'll therefore suggest running the examples with at the exam.
+The tools a created to people with an understanding of the maya software, I'll therefore suggest running the examples with me at the exam.
 
 ## Exam Proposal
 This project is a solo project, as it takes interest in my future internship. My project will focus on
