@@ -32,7 +32,7 @@ A completed retimer tool for animation & prototype of procedural modeling script
 
 The retimer tool is used automate lot of the manual work that needs to be done in an animation. With a tool like this you can get your animation to feel just right. The tool utilizes the Maya timeline data, reading the keyframes creating accesspoints through an easy to use interface. To use this tool, you are required to have a keyframes to edit, therefore I have created an animation example that can be used.  
 
-The procedural modeling script is bonus project i did to showcase how to can receive mesh data from maya, and create simple mesh shapes in an easier way. 
+The procedural modeling script is bonus project i did to showcase how to receive mesh data from maya, and create simple mesh shapes in an easier way. 
 
 
 ## Guides to Test the projects
